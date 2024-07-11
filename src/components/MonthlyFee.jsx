@@ -58,7 +58,7 @@ const MonthlyFee = ({ isEditing }) => {
           <div
             key={index}
             className={`mt-1 text-xs flex relative py-[3px] border-b-[1px] border-[#88d6ff] ${baseTopClass} ${
-              index === array.length - 1 ? "border-b-[0] bg-transparent" : ""
+              index === array.length - 1 ? "border-b-[0]" : ""
             }`}
           >
             <p className={`relative font-medium w-[387px] ${baseTopClass}`}>
