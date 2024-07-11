@@ -2,7 +2,7 @@ import { useEffect } from "react";
 
 const useVisibilityToggle = (toggleVisibility, elementRef) => {
   useEffect(() => {
-    const handleClickOutside = (event) => {console.log(event.target)
+    const handleClickOutside = (event) => {
       if (elementRef.current && !elementRef.current.contains(event.target)) {
         toggleVisibility(false);
       }

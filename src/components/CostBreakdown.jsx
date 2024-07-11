@@ -3,10 +3,8 @@ import CostBreakdownAddForm from "./CostBreakdownAddForm";
 
 const CostBreakdown = ({ isEditing }) => {
   const [inputs, setInputs] = useState();
-  const [array, setArray] = useState([
-    { id: 1, fee: "Onboarding/Recruitment fee", amount: 750 },
-    { id: 2, fee: "Security bond", amount: 1995 },
-  ]);
+  const [currency, setCurrency] = useState("USD");
+  const [array, setArray] = useState([]);
 
   const handleInputs = (e) => {
     const { name, value } = e.target;
@@ -23,7 +21,7 @@ const CostBreakdown = ({ isEditing }) => {
     }
     setArray((prev) => [
       ...prev,
-      { ...inputs, id: Math.floor(Math.random() * 100) + 1 },
+      { ...inputs, id: Math.floor(Math.random() * 100) + 1, currency, },
     ]);
   };
 
@@ -67,7 +65,7 @@ const CostBreakdown = ({ isEditing }) => {
             <p
               className={`relative font-semibold w-[70%] text-nowrap ${baseTopClass}`}
             >
-              US$ {new Intl.NumberFormat().format(data.amount)}
+              {data.currency} {new Intl.NumberFormat().format(data.amount)}
             </p>
             <button
               onClick={() => handleRemove(data.id)}
@@ -83,6 +81,8 @@ const CostBreakdown = ({ isEditing }) => {
           <CostBreakdownAddForm
             handleAdd={handleAdd}
             handleInputs={handleInputs}
+            currency={currency}
+            handleCurrency={setCurrency}
           />
         )}
 
@@ -90,7 +90,9 @@ const CostBreakdown = ({ isEditing }) => {
           className={`mt-1 text-xs flex py-[6px] font-bold text-[#38bbff] relative ${baseTopClass}`}
         >
           <p className="w-[498px] uppercase pb-2">Total One-Off Cost</p>
-          <p>US$ {new Intl.NumberFormat().format(totalAmount)}</p>
+          <p>
+            {currency} {new Intl.NumberFormat().format(totalAmount)}
+          </p>
         </div>
       </div>
     </div>

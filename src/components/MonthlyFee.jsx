@@ -4,6 +4,8 @@ import MonthlyFeeAddForm from "./MonthlyFeeAddForm";
 const MonthlyFee = ({ isEditing }) => {
   const [inputs, setInputs] = useState();
   const [array, setArray] = useState([]);
+  const [currency, setCurrency] = useState("USD");
+
   const handleInputs = (e) => {
     const { name, value } = e.target;
 
@@ -19,7 +21,7 @@ const MonthlyFee = ({ isEditing }) => {
     }
     setArray((prev) => [
       ...prev,
-      { ...inputs, id: Math.floor(Math.random() * 100) + 1 },
+      { ...inputs, id: Math.floor(Math.random() * 100) + 1, currency },
     ]);
   };
   const handleRemove = (id) => {
@@ -58,7 +60,9 @@ const MonthlyFee = ({ isEditing }) => {
           <div
             key={index}
             className={`mt-1 text-xs flex relative py-[3px] border-b-[1px] border-[#88d6ff] ${baseTopClass} ${
-              index === array.length - 1 ? "border-b-[0px] border-opacity-0" : ""
+              index === array.length - 1
+                ? "border-b-[0px] border-opacity-0"
+                : ""
             }`}
           >
             <p className={`relative font-medium w-[387px] ${baseTopClass}`}>
@@ -70,7 +74,7 @@ const MonthlyFee = ({ isEditing }) => {
             <p
               className={`relative font-semibold w-[70px] text-nowrap ${baseTopClass}`}
             >
-              US$ {new Intl.NumberFormat().format(data.total)}
+              {data.currency} {new Intl.NumberFormat().format(data.total)}
             </p>
             <button
               onClick={() => handleRemove(data.id)}
@@ -86,6 +90,8 @@ const MonthlyFee = ({ isEditing }) => {
           <MonthlyFeeAddForm
             handleAdd={handleAdd}
             handleInputs={handleInputs}
+            currency={currency}
+            handleCurrency={setCurrency}
           />
         )}
       </div>
