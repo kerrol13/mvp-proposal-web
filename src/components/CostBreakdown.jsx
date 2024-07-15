@@ -21,7 +21,7 @@ const CostBreakdown = ({ isEditing }) => {
     }
     setArray((prev) => [
       ...prev,
-      { ...inputs, id: Math.floor(Math.random() * 100) + 1, currency, },
+      { ...inputs, id: Math.floor(Math.random() * 100) + 1, currency },
     ]);
   };
 
@@ -29,6 +29,7 @@ const CostBreakdown = ({ isEditing }) => {
     (value, current) => value + current.amount,
     0
   );
+  const GST = totalAmount * 0.1;
   const baseTopClass = isEditing ? "" : "-top-2";
 
   const handleRemove = (id) => {
@@ -85,13 +86,26 @@ const CostBreakdown = ({ isEditing }) => {
             handleCurrency={setCurrency}
           />
         )}
+        {currency === "AUD" && (
+          <div
+            className={`mt-1 text-xs flex font-medium py-[3px] relative ${baseTopClass}`}
+          >
+            <p className="w-[498px]">Goods and Services Tax</p>
+            <p className="font-semibold">
+              {currency} {new Intl.NumberFormat("en-NZ", { minimumFractionDigits:0 }).format(GST)}
+            </p>
+          </div>
+        )}
 
         <div
-          className={`mt-1 text-xs flex py-[6px] font-bold text-[#38bbff] relative ${baseTopClass}`}
+          className={`mt-1 text-xs flex py-[6px]  font-bold text-[#38bbff] relative ${baseTopClass}`}
         >
-          <p className="w-[498px] uppercase pb-2">Total One-Off Cost</p>
+          <p className="w-[498px] uppercase pb-2  ">Total One-Off Cost</p>
           <p>
-            {currency} {new Intl.NumberFormat().format(totalAmount)}
+            {currency}{" "}
+            {new Intl.NumberFormat("en-NZ", { minimumFractionDigits: 0 }).format(
+              currency === "AUD" ? totalAmount + GST : totalAmount
+            )}
           </p>
         </div>
       </div>

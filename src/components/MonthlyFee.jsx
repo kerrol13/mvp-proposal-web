@@ -5,7 +5,7 @@ const MonthlyFee = ({ isEditing }) => {
   const [inputs, setInputs] = useState();
   const [array, setArray] = useState([]);
   const [currency, setCurrency] = useState("USD");
-
+  const GST = 0.1;
   const handleInputs = (e) => {
     const { name, value } = e.target;
 
@@ -42,16 +42,17 @@ const MonthlyFee = ({ isEditing }) => {
       </div>
       <div className="px-5 pt-6">
         <div
-          className={`flex uppercase text-[.8.1rem] relative ${baseTopClass}`}
+          className={`flex uppercase text-[.8.1rem] gap-20 relative ${baseTopClass}`}
         >
-          <strong className={`w-[384px] relative ${baseTopClass}`}>
+          <strong className={`flex-1 relative ${baseTopClass}`}>
             Job Position
           </strong>
-          <strong className={`w-[110px] relative ${baseTopClass}`}>
+          <strong className={`flex-2  relative ${baseTopClass}`}>
             Quantity
           </strong>
+          <strong className={`flex-2  relative ${baseTopClass}`}>GST</strong>
           <strong
-            className={`w-[110px] relative ${baseTopClass} whitespace-nowrap`}
+            className={`flex-2 relative ${baseTopClass} whitespace-nowrap`}
           >
             Total Monthly Cost
           </strong>
@@ -59,22 +60,38 @@ const MonthlyFee = ({ isEditing }) => {
         {array.map((data, index) => (
           <div
             key={index}
-            className={`mt-1 text-xs flex relative py-[3px] border-b-[1px] border-[#88d6ff] ${baseTopClass} ${
+            className={`mt-1 text-xs flex relative py-[3px] gap-20 border-b-[1px] border-[#88d6ff] ${baseTopClass} ${
               index === array.length - 1
                 ? "border-b-[0px] border-opacity-0"
                 : ""
             }`}
           >
-            <p className={`relative font-medium w-[387px] ${baseTopClass}`}>
+            <p
+              className={`relative font-medium flex-1 min-w-[160px] max-w-[160px]  ${baseTopClass}`}
+            >
               {data.jobPosition}
             </p>
-            <p className={`relative font-semibold w-[110px] ${baseTopClass}`}>
+            <p
+              className={`relative font-semibold flex-3 min-w-[70px] max-w-[70px] ${baseTopClass}`}
+            >
               {data.quantity}
             </p>
             <p
-              className={`relative font-semibold w-[70px] text-nowrap ${baseTopClass}`}
+              className={`relative font-semibold flex-2 min-w-[25px] max-w-[25px] ${baseTopClass}`}
             >
-              {data.currency} {new Intl.NumberFormat().format(data.total)}
+              {new Intl.NumberFormat("en-NZ", {
+                minimumFractionDigits: 0,
+              }).format(data.total * GST)}
+            </p>
+            <p
+              className={`relative font-semibold flex-2 text-nowrap  max-w-[20px] ${baseTopClass}`}
+            >
+              {data.currency}{" "}
+              {new Intl.NumberFormat("en-NZ", {
+                minimumFractionDigits: 0,
+              }).format(
+                currency === "AUD" ? data.total + data.total * GST : data.total
+              )}
             </p>
             <button
               onClick={() => handleRemove(data.id)}
@@ -88,6 +105,8 @@ const MonthlyFee = ({ isEditing }) => {
         ))}
         {isEditing && (
           <MonthlyFeeAddForm
+          inputs={inputs}
+          GST={GST}
             handleAdd={handleAdd}
             handleInputs={handleInputs}
             currency={currency}
