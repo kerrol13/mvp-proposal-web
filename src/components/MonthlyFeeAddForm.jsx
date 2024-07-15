@@ -32,7 +32,7 @@ const MonthlyFeeAddForm = ({
         />
       </div>
       <div className="text-xs font-semibold flex-2 min-w-[25px] max-w-[25px] justify-center">
-        <p>{(inputs.total * GST).toFixed(1)}</p>
+        <p>{(inputs?.total * GST).toFixed(1)}</p>
       </div>
       <div className="text-xs font-semibold  flex max-w-[60px] -ml-7  items-center gap-2">
         <Dropdown handleCurrency={handleCurrency} currency={currency} />

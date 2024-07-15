@@ -50,7 +50,9 @@ const MonthlyFee = ({ isEditing }) => {
           <strong className={`flex-2  relative ${baseTopClass}`}>
             Quantity
           </strong>
-          <strong className={`flex-2  relative ${baseTopClass}`}>GST</strong>
+          {currency === "AUD" && (
+            <strong className={`flex-2  relative ${baseTopClass}`}>GST</strong>
+          )}
           <strong
             className={`flex-2 relative ${baseTopClass} whitespace-nowrap`}
           >
@@ -76,37 +78,43 @@ const MonthlyFee = ({ isEditing }) => {
             >
               {data.quantity}
             </p>
-            <p
-              className={`relative font-semibold flex-2 min-w-[25px] max-w-[25px] ${baseTopClass}`}
-            >
-              {new Intl.NumberFormat("en-NZ", {
-                minimumFractionDigits: 0,
-              }).format(data.total * GST)}
-            </p>
-            <p
-              className={`relative font-semibold flex-2 text-nowrap  max-w-[20px] ${baseTopClass}`}
-            >
-              {data.currency}{" "}
-              {new Intl.NumberFormat("en-NZ", {
-                minimumFractionDigits: 0,
-              }).format(
-                currency === "AUD" ? data.total + data.total * GST : data.total
-              )}
-            </p>
-            <button
-              onClick={() => handleRemove(data.id)}
-              className={`text-xs font-semibold  flex justify-end  p-[1px] w-20 rounded-lg my-[2px] text-red-500 ${
-                isEditing ? "" : "opacity-0"
-              }`}
-            >
-              Remove
-            </button>
+            {currency === "AUD" && (
+              <p
+                className={`relative font-semibold flex-2 min-w-[25px] max-w-[25px] ${baseTopClass}`}
+              >
+                {new Intl.NumberFormat("en-NZ", {
+                  minimumFractionDigits: 0,
+                }).format(data?.total * GST)}
+              </p>
+            )}
+            <div className="flex flex-2 ">
+              <p
+                className={`relative font-semibold  text-nowrap   ${baseTopClass}`}
+              >
+                {data.currency}{" "}
+                {new Intl.NumberFormat("en-NZ", {
+                  minimumFractionDigits: 0,
+                }).format(
+                  currency === "AUD"
+                    ? data?.total + data?.total * GST
+                    : data?.total
+                )}
+              </p>
+              <button
+                onClick={() => handleRemove(data.id)}
+                className={`text-xs font-semibold  flex justify-end  p-[1px] w-20 rounded-lg my-[2px] text-red-500 ${
+                  isEditing ? "" : "opacity-0"
+                }`}
+              >
+                Remove
+              </button>
+            </div>
           </div>
         ))}
         {isEditing && (
           <MonthlyFeeAddForm
-          inputs={inputs}
-          GST={GST}
+            inputs={inputs}
+            GST={GST}
             handleAdd={handleAdd}
             handleInputs={handleInputs}
             currency={currency}
