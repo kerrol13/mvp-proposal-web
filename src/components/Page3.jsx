@@ -1,4 +1,4 @@
-import image3 from "../assets/page3.avif";
+import image3 from "../assets/page3.jpeg";
 
 const Page3 = ({ isEditing }) => {
   return (

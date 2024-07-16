@@ -1,4 +1,4 @@
-import image1 from "../assets/page1.avif";
+import image1 from "../assets/page1.jpeg";
 import ReactTextareaAutosize from "react-textarea-autosize";
 import { useRef, useState } from "react";
 import { Calendar } from "react-date-range";

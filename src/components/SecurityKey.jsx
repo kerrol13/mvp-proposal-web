@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import {  useLayoutEffect, useRef, useState } from "react";
 
 const SecurityKey = ({ setIsAccess }) => {
   const inputRef = useRef();
@@ -17,7 +17,7 @@ const SecurityKey = ({ setIsAccess }) => {
     }
   };
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (accessKey && accessKey === ACCESS_KEY) {
       setIsAccess(true);
     }

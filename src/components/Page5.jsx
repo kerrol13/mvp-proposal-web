@@ -1,4 +1,4 @@
-import image5 from "../assets/5.avif";
+import image5 from "../assets/page5.jpeg";
 import CostBreakdown from "./CostBreakdown";
 import MonthlyFee from "./MonthlyFee";
 import OtherCost from "./OtherCost";
