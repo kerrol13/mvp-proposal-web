@@ -42,11 +42,12 @@ const MonthlyFee = ({ isEditing }) => {
       </div>
       <div className="px-5 pt-6">
         <div
-          className={`flex uppercase text-[.8.1rem] gap-20 relative ${baseTopClass}`}
+          className={`flex uppercase text-[.8.1rem] gap-10 relative ${baseTopClass}`}
         >
           <strong className={`flex-1 relative ${baseTopClass}`}>
             Job Position
           </strong>
+          <strong className={`flex-2  relative ${baseTopClass} min-w-[80px]`}>Cost</strong>
           <strong className={`flex-2  relative ${baseTopClass}`}>
             Quantity
           </strong>
@@ -62,18 +63,23 @@ const MonthlyFee = ({ isEditing }) => {
         {array.map((data, index) => (
           <div
             key={index}
-            className={`mt-1 text-xs flex relative py-[3px] gap-20 border-b-[1px] border-[#88d6ff] ${baseTopClass} ${
+            className={`mt-1 text-xs flex relative py-[3px] gap-10 border-b-[1px] border-[#88d6ff] ${baseTopClass} ${
               index === array.length - 1
                 ? "border-b-[0px] border-opacity-0"
                 : ""
             }`}
           >
             <p
-              className={`relative font-medium flex-1 min-w-[163px]  ${
-                currency === "AUD" ? "max-w-[160px]" : " max-w-[270px]"
+              className={`relative font-medium flex-1 min-w-[120px]  ${
+                currency === "AUD" ? "max-w-[203px]" : " max-w-[270px]"
               } ${baseTopClass}`}
             >
               {data.jobPosition}
+            </p>
+            <p
+              className={`relative font-semibold flex-3 min-w-[80px] max-w-[80px] ${baseTopClass}`}
+            >
+              {data.cost}
             </p>
             <p
               className={`relative font-semibold flex-3 min-w-[68px] max-w-[68px] ${baseTopClass}`}
@@ -86,7 +92,7 @@ const MonthlyFee = ({ isEditing }) => {
               >
                 {new Intl.NumberFormat("en-NZ", {
                   minimumFractionDigits: 0,
-                }).format(data?.total * GST)}
+                }).format(data?.cost *data?.quantity * GST)}
               </p>
             )}
             <div className="flex flex-2">
@@ -98,8 +104,8 @@ const MonthlyFee = ({ isEditing }) => {
                   minimumFractionDigits: 0,
                 }).format(
                   currency === "AUD"
-                    ? data?.total + data?.total * GST
-                    : data?.total
+                    ? data?.cost *data?.quantity + data?.cost *data?.quantity * GST
+                    : data?.cost *data?.quantity
                 )}
               </p>
               <button
