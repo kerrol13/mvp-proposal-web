@@ -73,7 +73,6 @@ const MonthlyFee = ({ isEditing }) => {
                 currency === "AUD" ? "max-w-[160px]" : " max-w-[270px]"
               } ${baseTopClass}`}
             >
-              {  console.log(currency)}
               {data.jobPosition}
             </p>
             <p
