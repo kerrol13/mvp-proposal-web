@@ -8,10 +8,13 @@ const MonthlyFeeAddForm = ({
   inputs,
   GST,
 }) => {
-  console.log(inputs);
   return (
     <form onSubmit={handleAdd} className="flex gap-20 pb-2">
-      <div className="flex-1 min-w-[160px] max-w-[160px]">
+      <div
+        className={`flex-1 min-w-[163px]   ${
+          currency === "AUD" ? "max-w-[163px]" : " max-w-[270px]"
+        } `}
+      >
         <input
           required
           name="jobPosition"
@@ -31,9 +34,12 @@ const MonthlyFeeAddForm = ({
           className="mt-1 py-[3px] min-w-[70px] max-w-[70px] border-b-[1px] border-black/50 bg-transparent"
         />
       </div>
-      <div className="text-xs font-semibold flex-2 min-w-[25px] max-w-[25px] justify-center">
-        <p>{(inputs?.total * GST).toFixed(1)}</p>
-      </div>
+      {currency === "AUD" && (
+        <div className="text-xs font-semibold flex-2 min-w-[25px] max-w-[25px] justify-center">
+          <p>{(inputs?.total * GST).toFixed(1)}</p>
+        </div>
+      )}
+
       <div className="text-xs font-semibold  flex max-w-[60px] -ml-7  items-center gap-2">
         <Dropdown handleCurrency={handleCurrency} currency={currency} />
         <input

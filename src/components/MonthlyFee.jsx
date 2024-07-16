@@ -69,27 +69,30 @@ const MonthlyFee = ({ isEditing }) => {
             }`}
           >
             <p
-              className={`relative font-medium flex-1 min-w-[160px] max-w-[160px]  ${baseTopClass}`}
+              className={`relative font-medium flex-1 min-w-[163px]  ${
+                currency === "AUD" ? "max-w-[160px]" : " max-w-[270px]"
+              } ${baseTopClass}`}
             >
+              {  console.log(currency)}
               {data.jobPosition}
             </p>
             <p
-              className={`relative font-semibold flex-3 min-w-[70px] max-w-[70px] ${baseTopClass}`}
+              className={`relative font-semibold flex-3 min-w-[68px] max-w-[68px] ${baseTopClass}`}
             >
               {data.quantity}
             </p>
             {currency === "AUD" && (
               <p
-                className={`relative font-semibold flex-2 min-w-[25px] max-w-[25px] ${baseTopClass}`}
+                className={`relative font-semibold flex-2 min-w-[27px] max-w-[27px] ${baseTopClass}`}
               >
                 {new Intl.NumberFormat("en-NZ", {
                   minimumFractionDigits: 0,
                 }).format(data?.total * GST)}
               </p>
             )}
-            <div className="flex flex-2 ">
+            <div className="flex flex-2">
               <p
-                className={`relative font-semibold  text-nowrap   ${baseTopClass}`}
+                className={`relative font-semibold text-nowrap w-[70px] ${baseTopClass}`}
               >
                 {data.currency}{" "}
                 {new Intl.NumberFormat("en-NZ", {
