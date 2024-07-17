@@ -66,7 +66,7 @@ const CostBreakdown = ({ isEditing }) => {
             <p
               className={`relative font-semibold w-[70%] text-nowrap ${baseTopClass}`}
             >
-              {data.currency} {new Intl.NumberFormat().format(data.amount)}
+              {data.currency} {new Intl.NumberFormat("en-NZ", { minimumFractionDigits:2 ,maximumFractionDigits: 2,}).format(data.amount)}
             </p>
             <button
               onClick={() => handleRemove(data.id)}
@@ -92,7 +92,7 @@ const CostBreakdown = ({ isEditing }) => {
           >
             <p className="w-[498px]">Goods and Services Tax</p>
             <p className="font-semibold">
-              {currency} {new Intl.NumberFormat("en-NZ", { minimumFractionDigits:0 }).format(GST)}
+              {currency} {new Intl.NumberFormat("en-NZ", { minimumFractionDigits:2 ,maximumFractionDigits: 2,}).format(GST)}
             </p>
           </div>
         )}
@@ -103,7 +103,7 @@ const CostBreakdown = ({ isEditing }) => {
           <p className="w-[498px] uppercase pb-2  ">Total One-Off Cost</p>
           <p>
             {currency}{" "}
-            {new Intl.NumberFormat("en-NZ", { minimumFractionDigits: 0 }).format(
+            {new Intl.NumberFormat("en-NZ", { minimumFractionDigits: 2,maximumFractionDigits: 2, }).format(
               currency === "AUD" ? totalAmount + GST : totalAmount
             )}
           </p>

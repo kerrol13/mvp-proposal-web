@@ -79,7 +79,10 @@ const MonthlyFee = ({ isEditing }) => {
             <p
               className={`relative font-semibold flex-3 min-w-[80px] max-w-[80px] ${baseTopClass}`}
             >
-              {data.cost}
+               {new Intl.NumberFormat("en-NZ", {
+                  minimumFractionDigits: 2,
+                  maximumFractionDigits: 2,
+                }).format(data?.cost)}
             </p>
             <p
               className={`relative font-semibold flex-3 min-w-[68px] max-w-[68px] ${baseTopClass}`}
@@ -91,7 +94,8 @@ const MonthlyFee = ({ isEditing }) => {
                 className={`relative font-semibold flex-2 min-w-[27px] max-w-[27px] ${baseTopClass}`}
               >
                 {new Intl.NumberFormat("en-NZ", {
-                  minimumFractionDigits: 0,
+                  minimumFractionDigits: 2,
+                  maximumFractionDigits: 2,
                 }).format(data?.cost *data?.quantity * GST)}
               </p>
             )}
@@ -101,7 +105,7 @@ const MonthlyFee = ({ isEditing }) => {
               >
                 {data.currency}{" "}
                 {new Intl.NumberFormat("en-NZ", {
-                  minimumFractionDigits: 0,
+                  minimumFractionDigits:2,
                 }).format(
                   currency === "AUD"
                     ? data?.cost *data?.quantity + data?.cost *data?.quantity * GST

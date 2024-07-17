@@ -20,6 +20,7 @@ const CostBreakdownAddForm = ({
       <div className="text-xs font-semibold flex items-center gap-2">
         <Dropdown handleCurrency={handleCurrency} currency={currency} />
         <input
+       step=".01"
           required
           name="amount"
           onChange={handleInputs}

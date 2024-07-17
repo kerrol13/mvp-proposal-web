@@ -32,6 +32,7 @@ const MonthlyFeeAddForm = ({
         <div className="text-xs font-semibold  flex max-w-[149px] -ml-16  items-center gap-2">
           <Dropdown handleCurrency={handleCurrency} currency={currency} />
           <input
+          step=".01"
             required
             name="cost"
             onChange={handleInputs}
@@ -52,12 +53,12 @@ const MonthlyFeeAddForm = ({
         />
       </div>
       {currency === "AUD" && (
-        <div className="text-xs font-semibold flex-2 min-w-[25px] max-w-[25px] justify-center">
-          <p>{(total * GST).toFixed(1)}</p>
+        <div className="text-xs font-semibold flex-2 item py-2 min-w-[25px] max-w-[25px] justify-center">
+          <p>{(total * GST).toFixed(2)}</p>
         </div>
       )}
-      <div className="text-xs font-semibold flex-2 min-w-[58px] max-w-[58px] justify-center">
-        <p>{(total).toFixed(1)}</p>
+      <div className="text-xs font-semibold flex-2 py-2 min-w-[58px] max-w-[58px] justify-center">
+        <p>{(total).toFixed(2)}</p>
       </div>
 
       <button className="text-xs font-semibold p-[7px] bg-[#38bbff] min-w-[55px] flex justify-center items-center rounded-lg my-[2px] text-white">
