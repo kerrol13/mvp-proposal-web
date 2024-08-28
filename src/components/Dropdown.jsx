@@ -1,38 +1,37 @@
 import { useState } from "react";
 import DropdownIcon from "../assets/DropdownIcon";
 
+const CURRENCIES = ["USD", "AUD", "NZD"];
+
 const Dropdown = ({ currency, handleCurrency }) => {
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const handleDropdown = () => {
-    setIsDropdownOpen((prev) => !prev);
-  };
-  const handleSelectedCurrency = (value) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const toggleDropdown = () => setIsOpen(!isOpen);
+
+  const selectCurrency = (value) => {
     handleCurrency(value);
-    setIsDropdownOpen(false);
+    setIsOpen(false);
   };
+
   return (
     <div>
       <button
-        onClick={handleDropdown}
+        onClick={toggleDropdown}
         type="button"
         className="border-[1px] px-2 border-zinc-400 py-1 flex justify-center gap-1 rounded-lg"
       >
         <p>{currency}</p> <DropdownIcon />
       </button>
-      {isDropdownOpen && (
+      {isOpen && (
         <ul className="absolute bg-white p-2 border-[1px] rounded-lg z-10 mt-1">
-          <li
-            onClick={() => handleSelectedCurrency("USD")}
-            className="p-1 hover:bg-slate-300 cursor-pointer rounded-md"
-          >
-            USD
-          </li>
-          <li
-            onClick={() => handleSelectedCurrency("AUD")}
-            className="p-1  hover:bg-slate-300 cursor-pointer rounded-md"
-          >
-            AUD
-          </li>
+          {CURRENCIES.map((c) => (
+            <li
+              key={c}
+              onClick={() => selectCurrency(c)}
+              className="p-1 hover:bg-slate-300 cursor-pointer rounded-md"
+            >
+              {c}
+            </li>
+          ))}
         </ul>
       )}
     </div>

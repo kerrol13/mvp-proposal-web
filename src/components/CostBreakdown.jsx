@@ -29,7 +29,8 @@ const CostBreakdown = ({ isEditing }) => {
     (value, current) => value + current.amount,
     0
   );
-  const GST = totalAmount * 0.1;
+  const AUGST = totalAmount * 0.1;
+  const NZGST = totalAmount * 0.15;
   const baseTopClass = isEditing ? "" : "-top-2";
 
   const handleRemove = (id) => {
@@ -66,7 +67,11 @@ const CostBreakdown = ({ isEditing }) => {
             <p
               className={`relative font-semibold w-[70%] text-nowrap ${baseTopClass}`}
             >
-              {data.currency} {new Intl.NumberFormat("en-NZ", { minimumFractionDigits:2 ,maximumFractionDigits: 2,}).format(data.amount)}
+              {data.currency}{" "}
+              {new Intl.NumberFormat("en-NZ", {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+              }).format(data.amount)}
             </p>
             <button
               onClick={() => handleRemove(data.id)}
@@ -92,7 +97,11 @@ const CostBreakdown = ({ isEditing }) => {
           >
             <p className="w-[498px]">Goods and Services Tax</p>
             <p className="font-semibold">
-              {currency} {new Intl.NumberFormat("en-NZ", { minimumFractionDigits:2 ,maximumFractionDigits: 2,}).format(GST)}
+              {currency}{" "}
+              {new Intl.NumberFormat("en-NZ", {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+              }).format(AUGST)}
             </p>
           </div>
         )}
@@ -103,9 +112,10 @@ const CostBreakdown = ({ isEditing }) => {
           <p className="w-[498px] uppercase pb-2  ">Total One-Off Cost</p>
           <p>
             {currency}{" "}
-            {new Intl.NumberFormat("en-NZ", { minimumFractionDigits: 2,maximumFractionDigits: 2, }).format(
-              currency === "AUD" ? totalAmount + GST : totalAmount
-            )}
+            {new Intl.NumberFormat("en-NZ", {
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2,
+            }).format(currency === "AUD" ? totalAmount + AUGST : totalAmount)}
           </p>
         </div>
       </div>
